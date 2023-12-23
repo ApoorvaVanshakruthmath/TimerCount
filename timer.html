@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>timer</title>
+    <link rel="stylesheet" href="timer.css" />
+  </head>
+  <body>
+    <div id="timerContainer">
+      <div id="timeDisplay">00:00:00</div>
+      <button id="startBtn" class="timerBtn">Start</button>
+      <button id="pauseBtn" class="timerBtn">Pause</button>
+      <button id="restartBtn" class="timerBtn">Restart</button>
+    </div>
+    <script>
+      const timeDisplay = document.getElementById("timeDisplay");
+      const startBtn = document.getElementById("startBtn");
+      const pauseBtn = document.getElementById("pauseBtn");
+      const restartBtn = document.getElementById("restartBtn");
+
+      let startTime = 0;
+      let elapsedTime = 0;
+      let currentTime = 0;
+      let paused = false;
+      let intervalId;
+      let hrs = 0;
+      let mins = 0;
+      let secs = 0;
+
+      startBtn.addEventListener("click", () => {
+        if (paused) {
+          paused = false;
+          startTime = Date.now() - elapsedTime;
+          intervalId = setInterval(updateTime, 75);
+        }
+      });
+      pauseBtn.addEventListener("click", () => {
+        if (!paused) {
+          paused = true;
+          elapsedTime = Date.now() - startTime;
+          clearInterval(intervalId);
+        }
+      });
+      restartBtn.addEventListener("click", () => {
+        paused = true;
+        clearInterval(intervalId);
+        startTime = 0;
+        elapsedTime = 0;
+        currentTime = 0;
+        hrs = 0;
+        mins = 0;
+        secs = 0;
+        timeDisplay.textContent = "00:00:00";
+      });
+
+      function updateTime() {
+        elapsedTime = Date.now() - startTime;
+        secs = Math.floor((elapsedTime / 1000) % 60);
+        mins = Math.floor((elapsedTime / (1000 * 60)) % 60);
+        hrs = Math.floor((elapsedTime / (1000 * 60 * 60)) % 60);
+
+        secs = pad(secs);
+        hrs = pad(hrs);
+        mins = pad(mins);
+
+        timeDisplay.textContent = `${hrs}:${mins}:${secs}`;
+      }
+
+      function pad(unit) {
+        return unit.toString().length > 1 ? unit : "0" + unit;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+#timeDisplay {
+  font-size: 34px;
+  font-family: "Courier New", Courier, monospace;
+}
+.timerBtn {
+  height: 45px;
+  width: 77px;
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 12px;
+  border: 2px solid;
+  background-color: rgb(41, 43, 42);
+  color: aliceblue;
+  cursor: pointer;
+}
+#timerContainer {
+  border: 2px solid;
+  width: 345px;
+  text-align: center;
+  margin-left: 230px;
+  color: rgb(6, 149, 94);
+  background-color: rgb(41, 43, 42);
+  padding-bottom: 23px;
+  padding-top: 23px;
+}
